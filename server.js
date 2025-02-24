@@ -7,11 +7,12 @@ const app = express();
 
 // ✅ Proper CORS setup to allow frontend access
 const corsOptions = {
-    origin: "https://www.seekerofpower.com", // Allow only your site
+    origin: ["https://seekerofpower.com", "https://www.seekerofpower.com"], // ✅ Allow both versions
     methods: "POST, GET, OPTIONS",
     allowedHeaders: "Content-Type",
-    credentials: true
+    credentials: true 
 };
+
 
 app.use(cors(corsOptions));
 app.use(express.json());
