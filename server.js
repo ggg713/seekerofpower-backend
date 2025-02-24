@@ -4,7 +4,16 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const cors = require("cors");
 
 const app = express();
-app.use(cors());
+
+// ✅ Fix CORS issue to allow requests from frontend
+const corsOptions = {
+    origin: "https://www.seekerofpower.com", // Allow only your frontend
+    methods: "POST, GET, OPTIONS",
+    allowedHeaders: "Content-Type",
+    credentials: true // Allow cookies and authentication headers
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.post("/create-checkout-session", async (req, res) => {
@@ -36,5 +45,6 @@ app.get("/", (req, res) => {
     res.send("Backend is running!");
 });
 
-const PORT = process.env.PORT || 3000;
+// ✅ Ensure Render assigns the correct port
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
