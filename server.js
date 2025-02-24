@@ -5,12 +5,12 @@ const cors = require("cors");
 
 const app = express();
 
-// ✅ Fix CORS issue to allow requests from frontend
+// ✅ Proper CORS setup to allow frontend access
 const corsOptions = {
-    origin: "https://www.seekerofpower.com", // Allow only your frontend
+    origin: "https://www.seekerofpower.com", // Allow only your site
     methods: "POST, GET, OPTIONS",
     allowedHeaders: "Content-Type",
-    credentials: true // Allow cookies and authentication headers
+    credentials: true
 };
 
 app.use(cors(corsOptions));
@@ -41,10 +41,7 @@ app.post("/create-checkout-session", async (req, res) => {
     }
 });
 
-app.get("/", (req, res) => {
-    res.send("Backend is running!");
-});
-
-// ✅ Ensure Render assigns the correct port
+// ✅ Fix PORT issue - Declare only ONCE
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
